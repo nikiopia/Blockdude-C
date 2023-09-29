@@ -23,11 +23,13 @@ const char okChars[] = "#B D<>";
 typedef struct gameState {
 	char screen[SCREEN_H_MAX][SCREEN_W_MAX];
 	int screenHeight;
+	int screenWidth;
 	int playerX;
 	int playerY;
 	int holdingBox;
 	int gameRunning;
 	int updatedScreen;
+	int levelWon;
 } Game;
 
 // FUNCTION PROTOTYPES
@@ -61,5 +63,31 @@ void printWorld(Game* gameObj, int debug);
  *	@result		Move the character, update its posisition and refresh the screen 
 **/
 void moveHandler(Game* gameObj, int direction);
+
+/*!
+ *	@function	posClear
+ *	@param		gameObj		Pointer to the game object
+ *	@param		x			X location of test
+ *	@param		y			Y location of test
+ *	@result		Returns 1 if area is clear or a door, 0 if else
+**/
+int posClear(Game* gameObj, int x, int y);
+
+/*!
+ *	@function	movePlayer
+ *	@param		gameObj		Pointer to the game object
+ *	@param		destX		X location of destination
+ *	@param		destY		Y location of destination
+ *	@result		Moves the player and updates relevant info
+**/
+void movePlayer(Game* gameObj, int destX, int destY);
+
+/*!
+ *	@function	blockInteract
+ *	@param		gameObj		Pointer to the game object
+ *	@param		mode		Mode for dealing with blocks (1 -> pick up, -1 -> put down)
+ *	@result		Picking up and putting down blocks
+**/
+void blockInteract(Game* gameObj, int mode);
 
 #endif
